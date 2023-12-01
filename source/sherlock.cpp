@@ -1,12 +1,12 @@
-#include "duplicate_remover.hpp"
+#include "sherlock.hpp"
 
-duplicate_remover::duplicate_remover(const std::string &directory) : _directory(directory) 
+sherlock::sherlock(const std::string &directory) : _directory(directory) 
 {
     this->scan();
     this->remove();
 }
 
-void duplicate_remover::remove(void) 
+void sherlock::remove(void) 
 {
     for (uint32_t y = 0; y < files().size(); y++) {
         for (uint32_t x = 0; x < files().size(); x++) {
@@ -19,14 +19,14 @@ void duplicate_remover::remove(void)
     }
 }
 
-const std::string &duplicate_remover::directory(void) { return _directory; }
+const std::string &sherlock::directory(void) { return _directory; }
 
-std::vector<std::string> &duplicate_remover::files(void) { return _files; }
+std::vector<std::string> &sherlock::files(void) { return _files; }
 
-const std::vector<std::string> &duplicate_remover::scan(void) 
+const std::vector<std::string> &sherlock::scan(void) 
 {
     for (const auto &file : std::filesystem::recursive_directory_iterator(directory())) {
-        _files.push_back(file.path().c_str());
+        _files.push_back(file.path().string());
     }
     
     return _files;

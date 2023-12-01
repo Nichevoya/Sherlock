@@ -4,10 +4,10 @@
 #include <iostream>
 #include <filesystem>
 
-class duplicate_remover {
+class sherlock {
     public:
-        duplicate_remover(const std::string &directory = ".");
-        ~duplicate_remover() = default;
+        sherlock(const std::string &directory = ".");
+        ~sherlock() = default;
 
         void remove(void);
         const std::string &directory(void);
