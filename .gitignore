@@ -30,3 +30,13 @@
 *.exe
 *.out
 *.app
+
+# Build
+build
+
+# Example
+example
+
+# Binary
+duplicate remover
+duplicate remover.exe
