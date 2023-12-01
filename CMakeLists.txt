@@ -16,7 +16,9 @@ endif()
 
 # ------------------------------ dependencies ------------------------------ 
 
-find_package(NSIS REQUIRED)
+if (WIN32)
+    find_package(NSIS REQUIRED)
+endif()
 
 # ------------------------------ configuration ----------------------------- 
 
