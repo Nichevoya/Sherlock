@@ -1,4 +1,4 @@
-# ------------------------------ configuration ----------------------------- 
+# -------------------------------- sherlock -------------------------------- 
 
 cmake_minimum_required(VERSION 3.27.7)
 
@@ -6,17 +6,17 @@ set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_MODULE_PATH "${CMAKE_SOURCE_DIR}/.cmake/")
 
-project("Duplicate Remover" CXX)
-
-# ------------------------------ server steps ------------------------------ 
+project("Sherlock" CXX)
 
 if(CMAKE_BUILD_TYPE STREQUAL "Debug")
     add_definitions(-DDEBUG_MODE)
 elseif(CMAKE_BUILD_TYPE STREQUAL "Release")
     add_definitions(-DRELEASE_MODE)
-elseif(CMAKE_BUILD_TYPE STREQUAL "Distribution")
-    add_definitions(-DDIST_MODE)
 endif()
+
+# ------------------------------ dependencies ------------------------------ 
+
+find_package(NSIS REQUIRED)
 
 # ------------------------------ configuration ----------------------------- 
 
@@ -44,42 +44,41 @@ set(LIBRARY_LINK_FLAGS
     
 )
 
-set(DUPLICATE_REMOVER_BINARY bin)
+set(PROJECT_BINARY ${PROJECT_NAME})
 
-file(GLOB_RECURSE DUPLICATE_REMOVER_HEADERS "./source/*.hpp")
-file(GLOB_RECURSE DUPLICATE_REMOVER_SOURCES "./source/*.cpp")
+file(GLOB_RECURSE PROJECT_HEADERS "./source/*.hpp")
+file(GLOB_RECURSE PROJECT_SOURCES "./source/*.cpp")
 
-add_executable(${DUPLICATE_REMOVER_BINARY}
-    ${DUPLICATE_REMOVER_HEADERS}
-    ${DUPLICATE_REMOVER_SOURCES}
+add_executable(${PROJECT_BINARY}
+    ${PROJECT_HEADERS}
+    ${PROJECT_SOURCES}
 )
 
 # ---------------------------- compilation flags --------------------------- 
 
-target_compile_options(${DUPLICATE_REMOVER_BINARY} PRIVATE 
+target_compile_options(${PROJECT_BINARY} PRIVATE 
     ${COMPILATION_FLAGS}
 )
 
 # ----------------------------- link libraries ----------------------------- 
 
-target_link_libraries(${DUPLICATE_REMOVER_BINARY} PRIVATE 
+target_link_libraries(${PROJECT_BINARY} PRIVATE 
     ${LIBRARY_LINK_FLAGS}
 )
 
 # ----------------------------- header include ----------------------------- 
 
-target_include_directories(${DUPLICATE_REMOVER_BINARY} PRIVATE 
+target_include_directories(${PROJECT_BINARY} PRIVATE 
     ${INCLUDE_DIRECTORIES}
 )
 
 # ---------------------------- target properties --------------------------- 
 
-set_target_properties(${DUPLICATE_REMOVER_BINARY} PROPERTIES 
+set_target_properties(${PROJECT_BINARY} PROPERTIES 
     LINKER_LANGUAGE CXX 
-    RUNTIME_OUTPUT_NAME "duplicate remover" 
+    RUNTIME_OUTPUT_NAME "sherlockr" 
 )
 
-install(
-    TARGETS ${DUPLICATE_REMOVER_BINARY} 
-    DESTINATION ${CMAKE_SOURCE_DIR}
-)
+# ------------------------------ installation ------------------------------ 
+
+include(install.cmake)
