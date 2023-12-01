@@ -76,7 +76,7 @@ target_include_directories(${PROJECT_BINARY} PRIVATE
 
 set_target_properties(${PROJECT_BINARY} PROPERTIES 
     LINKER_LANGUAGE CXX 
-    RUNTIME_OUTPUT_NAME "sherlockr" 
+    RUNTIME_OUTPUT_NAME "sherlock" 
 )
 
 # ------------------------------ installation ------------------------------ 
