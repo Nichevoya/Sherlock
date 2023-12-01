@@ -2,7 +2,7 @@
 
 cmake_minimum_required(VERSION 3.27.7)
 
-set(CMAKE_CXX_STANDARD 23)
+set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_MODULE_PATH "${CMAKE_SOURCE_DIR}/.cmake/")
 
@@ -23,14 +23,14 @@ endif()
 if (UNIX)
     add_definitions(-DUNIX)
     set(COMPILATION_FLAGS
-        -std=c++23 -fPIC 
+        -std=c++20 -fPIC 
         -Wall -Wextra -Werror -Wpedantic -g 
     )
 
 elseif(WIN32)
     add_definitions(-DWIN32)
     set(COMPILATION_FLAGS
-        /std:c++23 
+        /std:c++20 
         /W4 /Zi 
     )
 
