@@ -47,6 +47,7 @@ set(LIBRARY_LINK_FLAGS
 )
 
 set(PROJECT_BINARY ${PROJECT_NAME})
+set(PROJECT_ICON "${CMAKE_SOURCE_DIR}/icon/icon.rc")
 
 file(GLOB_RECURSE PROJECT_HEADERS "./source/*.hpp")
 file(GLOB_RECURSE PROJECT_SOURCES "./source/*.cpp")
@@ -54,6 +55,7 @@ file(GLOB_RECURSE PROJECT_SOURCES "./source/*.cpp")
 add_executable(${PROJECT_BINARY}
     ${PROJECT_HEADERS}
     ${PROJECT_SOURCES}
+    ${PROJECT_ICON}
 )
 
 # ---------------------------- compilation flags --------------------------- 
@@ -78,7 +80,7 @@ target_include_directories(${PROJECT_BINARY} PRIVATE
 
 set_target_properties(${PROJECT_BINARY} PROPERTIES 
     LINKER_LANGUAGE CXX 
-    RUNTIME_OUTPUT_NAME "sherlock" 
+    RUNTIME_OUTPUT_NAME "Sherlock" 
 )
 
 # ------------------------------ installation ------------------------------ 
